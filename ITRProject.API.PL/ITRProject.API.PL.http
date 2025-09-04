@@ -1,0 +1,6 @@
+@ITRProject.API.PL_HostAddress = http://localhost:5191
+
+GET {{ITRProject.API.PL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
