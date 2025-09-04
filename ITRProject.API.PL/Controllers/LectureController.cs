@@ -43,6 +43,11 @@ namespace ITRProject.API.PL.Controllers
         [HttpGet("GetAllLecturesForCourse")]
         public async Task<ActionResult<ReturnLecturesDto>> GetAllLecturesForCourse(int CourseId)
         {
+
+            var course = _unitOfWork.CourseRepository.GetByIdAsync(CourseId);
+            if(course is null)
+                return NotFound(new ApiErrorResponse(StatusCodes.Status404NotFound, "Course with this Id is not Found"));
+
             var lecture = await _unitOfWork.LectureRepository.GetLectureForCourse(CourseId);
 
             var map = _mapper.Map<IEnumerable<ReturnLecturesDto>>(lecture);
