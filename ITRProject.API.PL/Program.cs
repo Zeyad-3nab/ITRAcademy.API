@@ -36,6 +36,8 @@ namespace ITRProject.API.PL
 
             // Add services to the container.
 
+
+
             builder.Services.AddControllers()
             .AddJsonOptions(options =>
             {
@@ -71,6 +73,15 @@ namespace ITRProject.API.PL
             builder.Services.AddSwaggerGenJwtAuth();
             builder.Services.AddCustomJwtAuth(builder.Configuration);
             var app = builder.Build();
+
+
+
+            //Apply Migrtion
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                dbContext.Database.Migrate();   // ·Ê ›Ì Migration ÂÌ ÿ»ﬁ √Ê Ê„« Ìﬂ
+            }
 
             // Seed roles
             using (var scope = app.Services.CreateScope())
