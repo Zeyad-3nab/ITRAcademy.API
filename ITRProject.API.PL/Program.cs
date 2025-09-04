@@ -80,10 +80,10 @@ namespace ITRProject.API.PL
             using (var scope = app.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.Migrate();   // ·Ê ›Ì Migration ÂÌ ÿ»ﬁ √Ê Ê„« Ìﬂ
+                 await dbContext.Database.MigrateAsync();
             }
 
-            // Seed roles
+            //Seed roles
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -96,7 +96,7 @@ namespace ITRProject.API.PL
             // Configure the HTTP request pipeline.
             //if (app.Environment.IsDevelopment())
             //{
-                app.UseSwagger();
+            app.UseSwagger();
                 app.UseSwaggerUI();
             //}
 
